@@ -1,4 +1,6 @@
 from xml_parser import XMLParser
+from xml_parser import ParserOptions
+from xml_parser import MetaOptions
 
 if __name__ == '__main__':
     # Hardcoded dict 'cause who wants to read from a JSON file
@@ -46,8 +48,18 @@ if __name__ == '__main__':
         'd': 'yes ¥ĘŜ YES',
         'e': None
     }
-    # Init the parser (No arguments means it's using default options)
-    parser = XMLParser()
+    # Configure options for the parser
+    parser_options = ParserOptions(
+        indent_value=2,
+        root_tag_name='root',
+        show_null_fields=False
+    )
+    meta_options = MetaOptions(
+        xml_version=1.0,
+        encoding='utf-8'
+    )
+    # Init parser with configuration above
+    parser = XMLParser(meta_options, parser_options)  # Arguments are optional
     # Parse the hardcoded dict to an XML string
     xml_data: str = parser.parse_to_xml(data_dict)
     # Write parsed data to file
