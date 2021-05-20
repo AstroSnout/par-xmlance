@@ -1,6 +1,11 @@
+from typing import AnyStr, List, Dict, SupportsInt, SupportsFloat
+# TODO - actually use typing imported above
+
+
 # --------------------- Custom Exceptions ---------------------
 class RequiredArgumentError(Exception):
     pass
+
 
 class BooleanValueError(Exception):
     pass
@@ -118,10 +123,9 @@ class XMLParser:
             'show_null_fields': parser_options.show_null_fields
         }
 
-    def to_file(self, file_name, xml_string, write_mode='wb') -> None:
+    def to_file(self, file_name: str, xml_string: any, write_mode: str = 'wb') -> None:
         with open(f'{file_name}', write_mode) as xml_file:
             xml_file.write(xml_string.encode(self._meta_options['encoding']))
-
         return xml_string
 
     def parse_to_xml(self, data_dictionary: dict) -> str:
